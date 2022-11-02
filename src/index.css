@@ -29,10 +29,13 @@ button {
   border: none;
   cursor: pointer;
 }
-
- .container{
+.App{
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+  .container{
  position: relative; 
- float: left;
+ 
  padding: 10px;
  margin-left: 15px; 
  
@@ -40,9 +43,9 @@ button {
 }
 .imagess{
   border-radius: 18px;
-}
+} 
 
-.container img{
+ .container img{
   height: auto;
   
 }
@@ -103,7 +106,7 @@ button {
 }
 .btn2, .btn1{
   color: blue;
-}
+} */
 input[type=range] {
 	height: 5px;
 	-webkit-appearance: none;
