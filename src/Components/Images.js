@@ -28,7 +28,7 @@ const Images = ({muse,music}) => {
     // console.log(music?.hub?.actions?.[1]?.uri)
     
     
-    console.log(muse.title)
+    // console.log(muse.title)
    
     
     
@@ -151,9 +151,10 @@ const trackStyling = `
     
      return ( 
         <div className="container" >
-          
+            
+                     
            <img src= {muse?.images?.coverart} alt='music art' className="imagess" /> 
-        
+           
             
            <MdSkipPrevious 
            size={30}

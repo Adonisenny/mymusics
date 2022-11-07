@@ -1,3 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@media(max-width:576px){
+   
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -31,22 +38,35 @@ button {
 }
 .App{
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns:auto auto auto
 }
-  .container{
+ .container{
  position: relative; 
  
- padding: 10px;
- margin-left: 15px; 
+ padding-bottom: 10px;
+ padding-top: 10px;
+ padding-left: 5px;
+ padding-right: 5px;
+ 
  
  
 }
 .imagess{
   border-radius: 18px;
+  object-fit: contain;
 } 
-
+.container{
+  display: grid;
+  
+}
+/* .btn2,.imagess,.btn1,.btn{
+  display: flex;
+        align-items: center;
+        justify-content: center;
+} */
  .container img{
   height: auto;
+  
   
 }
 .container .btn {
@@ -66,7 +86,7 @@ button {
 .container .btn1 {
   position: absolute;
   top: 50%;
-  left: 43%;
+  left: 40%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   color: rgb(29, 26, 26);
@@ -78,7 +98,7 @@ button {
 .container .btn2 {
   position: absolute;
   top: 50%;
-  left: 57%;
+  left: 59%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   color: rgb(29, 26, 26);
@@ -117,3 +137,60 @@ input[type=range] {
 	transition: background 0.2s ease;
 	cursor: pointer;
 }
+
+ .demps{
+  
+ margin-bottom: 10px; 
+ padding: 10px;
+} 
+
+h3{
+  margin-bottom: 20px;
+}
+
+.demps:hover{
+  background-color: #3b7677;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+
+}
+.houseps{
+ 
+  min-width: 15%;
+  margin-left: 15px;
+  
+}
+.housediv3{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-items: center;
+  align-items: center;
+
+}
+  
+.div3{
+  min-width: 15%;
+  margin-right: 0px;
+  align-items: center;
+  
+   
+}
+.imgdiv3{
+  padding: 12px;
+  max-width: 15%;
+  
+  
+
+
+} 
+.music-container{
+  display: grid;
+   grid-template-columns: 1fr 1fr 1fr ; 
+  min-width: 80%;
+  
+   }
+ .img{
+  width: fit-content;
+ }

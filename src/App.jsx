@@ -64,6 +64,7 @@ async function fetchdata() {
       },[])
       
     
+      const topchart = music.slice(0,5)
       
     
       
@@ -72,7 +73,16 @@ async function fetchdata() {
     
   return (
     <div className="App">
-    
+      
+      <div className='houseps'>
+<h3 className='font-bold'>side bar</h3>
+<p className='demps'>Discover</p>
+<p className='demps'>Top Charts</p>
+<p className='demps'>Around You</p>
+<p className='demps'>Top Artists</p>
+
+      </div>
+    <div className='music-container'>
     {music?.map((muse,index) => {
   return <Images
   
@@ -82,9 +92,27 @@ key={muse.key}
   music={music}
 />     
      })
+     
     
      }
      </div>
+
+
+     <div className='div3'>
+<h3 className='font-bold'>Top Chart</h3>
+{topchart.map((topc)=> {
+  return <div className='housediv3'>
+    <div className='imgdiv3'>
+    <img src={topc?.images?.coverart} alt='coverart' className='img'/>
+    </div>
+  <p>{topc.title}</p>
+  </div>
+    
+  
+})}
+</div>
+     </div>
+     
   )
     } 
 
