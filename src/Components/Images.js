@@ -150,10 +150,11 @@ const trackStyling = `
 
     
      return ( 
-        <div className="container" >
+        <div className="container w-56 h-auto " >
             
                      
            <img src= {muse?.images?.coverart} alt='music art' className="imagess" /> 
+           <p className='text-white'>{muse?.title}</p>
            
             
            <MdSkipPrevious 
