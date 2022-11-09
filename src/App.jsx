@@ -1,8 +1,13 @@
 import {useEffect,useState} from 'react'
+import {FaPauseCircle,FaPlayCircle} from 'react-icons/fa'
 import './App.css'
 import './index.css'
 import Images from './Components/Images';
 import Player from './Components/Player';
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import {Swiper, SwiperSlide} from 'swiper/react';
+import {FreeMode} from 'swiper'
 
 // const axios = require("axios");
 // const options = {
@@ -34,7 +39,7 @@ import Player from './Components/Player';
 const options = {
        method: 'GET',
        headers: {
-        'X-RapidAPI-Key': '167802d176mshb18125f38ae5fa3p1d4e61jsnb3c6604c2c15',
+        'X-RapidAPI-Key': 'b34370db6bmsh129f279d2bc7cdfp11712ejsn19a07be8ee98',
         'X-RapidAPI-Host': 'shazam-core.p.rapidapi.com'
        }
      };
@@ -42,6 +47,7 @@ const options = {
      const App =  () => {
       const [music,setMusic] = useState([])
       const [trackIndex,setTrackIndex] = useState(0) 
+      const [whatsPlaying,setWhatsPlaying] = useState(false)
       
 
 
@@ -64,7 +70,8 @@ async function fetchdata() {
       },[])
       
     
-      const topchart = music.slice(0,5)
+      const topchart = music?.slice(0,5)
+      const topPlay = music?.slice(0,7)
       
     
       
@@ -99,17 +106,58 @@ key={muse.key}
 
 
      <div className='div3'>
-<h3 className='font-bold'>Top Chart</h3>
-{topchart.map((topc)=> {
+<h3 className='font-bold text-white'>Top Chart</h3>
+{topchart.map((topc, index)=> {
   return <div className='housediv3'>
-    <div className='imgdiv3'>
-    <img src={topc?.images?.coverart} alt='coverart' className='img'/>
-    </div>
-  <p>{topc.title}</p>
+    <h3 className='text-gray-300'>{index + 1} </h3>
+     <img src={topc?.images?.coverart} alt='coverart' className='imgs p-3 rounded-md'/> 
+    
+  <p className='divps'>{topc.title}</p>
+&nbsp;&nbsp;&nbsp;
+  <FaPlayCircle 
+            size={20}
+            className='btn bg-slate-100'
+            
+            />
+            
+            
+  {console.log(index)}
   </div>
     
   
 })}
+{/* Top Artiste and Swiper */}
+{/* <div className="w-full flex flex-col mt-8">
+<div className="flex flex-row justify-between items-left">
+<h2 className="text-white font-bold text-2xl">
+Top Artists
+
+</h2>
+
+</div>
+<Swiper
+slidesPerView = 'auto'
+spaceBetween={10}
+freeMode
+centeredSlides
+centeredSlidesBounds
+modules={[FreeMode]}
+className='mt-4 m-4'
+>
+  {topPlay.map((song,i) => {
+    return <SwiperSlide
+    key={song?.key}
+    style={{width:'15%', height:'auto'}}
+    className='shadow-lg rounded-full animate-slideright'
+    
+    >
+      <img src={song?.images.background} alt='name' className='rounded-full w-full object-cover' />
+
+
+    </SwiperSlide>
+  })}
+  </Swiper>
+</div> */}
 </div>
      </div>
      
