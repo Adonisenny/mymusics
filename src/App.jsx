@@ -1,13 +1,15 @@
-import {useEffect,useState} from 'react'
-import {FaPauseCircle,FaPlayCircle} from 'react-icons/fa'
+import {useEffect,useState,useRef} from 'react';
+
+
+
 import './App.css'
 import './index.css'
 import Images from './Components/Images';
 import Player from './Components/Player';
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import {Swiper, SwiperSlide} from 'swiper/react';
-import {FreeMode} from 'swiper'
+
+import ThirdPartition from './Components/ThirdPartition';
+import FirstSidebar from './Components/FirstSidebar';
+import Controls from './Components/Controls';
 
 // const axios = require("axios");
 // const options = {
@@ -45,19 +47,9 @@ const options = {
      };
      
      const App =  () => {
-      const [music,setMusic] = useState([])
-      const [trackIndex,setTrackIndex] = useState(0) 
-      const [whatsPlaying,setWhatsPlaying] = useState(false)
       
 
-
-
-      
-     
-
-
-    
-    useEffect(() => {
+     useEffect(() => {
 async function fetchdata() {
       const response = await fetch('https://shazam-core.p.rapidapi.com/v1/charts/world', options)
        const data = await response.json();
@@ -68,64 +60,101 @@ async function fetchdata() {
 .then(data => setMusic(data))
       
       },[])
+      const [music,setMusic] = useState([])
       
-    
+      const [currentIndex,setCurrentIndex] = useState(null)
+      const [currentSong, setCurrentSong] =useState(music[0])
+
+      const [menuOpen,setMenuOpen] =useState(false)
       const topchart = music?.slice(0,5)
       const topPlay = music?.slice(0,7)
       
-    
+      // const currents = music[indexx]?.hub?.actions?.[1]?.uri
       
-    
-  
-    
-  return (
-    <div className="App">
       
-      <div className='houseps'>
-<h3 className='font-bold'>side bar</h3>
-<p className='demps'>Discover</p>
-<p className='demps'>Top Charts</p>
-<p className='demps'>Around You</p>
-<p className='demps'>Top Artists</p>
 
-      </div>
-    <div className='music-container'>
+      // const audioRef = useRef(new Audio(currents))
+      
+    
+     
+      // const toNextTrack = () => {
+       
+      //   setCurrentIndex(currentIndex + 1)
+      //   setCurrentSong(music[currentIndex + 1])
+      //   console.log('clicked')
+        
+        
+      // }
+      // const toPrevTrack =() => {
+      //   setCurrentIndex(currentIndex - 1)
+      //   setCurrentSong(music[currentIndex - 1])
+      // }
+       
+    const getSongData = (muse,index) => {
+console.log(index)
+setCurrentSong(muse)
+setCurrentIndex(index)
+
+    }
+    const toNextTrack = () => {
+      setCurrentIndex(currentIndex + 1)
+      setCurrentSong(music[currentIndex + 1])
+
+    }
+    const toPrevTrack = () => {
+      if(currentIndex === 0) {
+        return;
+      }else{
+      setCurrentIndex(currentIndex - 1)
+      setCurrentSong(music[currentIndex - 1])
+      }
+    }
+  return (
+    <>
+    <div className="App absolute">
+     
+
+ 
+ <FirstSidebar />
+
+     
+
+    <div className='music-container  grid grid-cols-1 px-32  md:grid-cols-3  md:px-0'>
+    <h2 className='block text-center text-white mt-7 md:hidden'>Discover Pop</h2>
     {music?.map((muse,index) => {
   return <Images
   
 key={muse.key}  
   muse={muse}
   index={index}
+  currentIndex={currentIndex}
+
   music={music}
+ 
+  getSongData={getSongData}
+  
 />     
      })
      
     
      }
      </div>
+     <div className='div3 hidden md:block '>
+     <h3 className='font-bold text-white'>Top Chart</h3>
+      {topchart.map((topc,index) => {
+       return <ThirdPartition
+        topchart={topchart}
+        key={topc.key}
+        index={index}
+        topc={topc}
+        currentIndex={currentIndex}
 
+        />
 
-     <div className='div3'>
-<h3 className='font-bold text-white'>Top Chart</h3>
-{topchart.map((topc, index)=> {
-  return <div className='housediv3'>
-    <h3 className='text-gray-300'>{index + 1} </h3>
-     <img src={topc?.images?.coverart} alt='coverart' className='imgs p-3 rounded-md'/> 
-    
-  <p className='divps'>{topc.title}</p>
-&nbsp;&nbsp;&nbsp;
-  <FaPlayCircle 
-            size={20}
-            className='btn bg-slate-100'
-            
-            />
-            
-            
-  {console.log(index)}
-  </div>
-    
-  
-})}
+      })}
+
+</div>
+
 {/* Top Artiste and Swiper */}
 {/* <div className="w-full flex flex-col mt-8">
 <div className="flex flex-row justify-between items-left">
@@ -158,9 +187,30 @@ className='mt-4 m-4'
   })}
   </Swiper>
 </div> */}
+
+
+
 </div>
-     </div>
-     
+
+ <div className='box stack-top relative bg-blue-300' >
+<Controls
+
+currentSong={currentSong}
+currentIndex={currentIndex}
+music={music}
+toNextTrack ={toNextTrack}
+toPrevTrack={toPrevTrack}
+
+className='control'
+
+/>  
+</div>
+       
+
+
+</> 
+
+    
   )
     } 
 
