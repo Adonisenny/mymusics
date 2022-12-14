@@ -45,7 +45,7 @@ console.log(currentSong)
     }
     const intervalRef =useRef()
     const isReady =useRef(false)
-    const {duration} =audioRef.current
+    
 
 
     const startTimer = () => {
@@ -71,12 +71,9 @@ console.log(currentSong)
 
 
 
-    const currentPercentage = duration ? `${(trackProgress / duration) * 100}%` : '0%';
-    const trackStyling = `
-      -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #fff), color-stop(${currentPercentage}, #777))
-    `;    
+        
     return ( 
-      <div className="player-card flex flex-row gap-12 md:flex flex-row gap-96 mt-2 " >
+      <div className="player-card flex flex-row gap-12 md:flex  mt-2 " >
         <audio
           ref={audioRef}
           src={currentSong?.hub?.actions?.[1]?.uri}
@@ -86,7 +83,7 @@ console.log(currentSong)
         </audio>
        {currentSong ? (
         <div className=" flex items-left justify-start gap-4 ml-4 md:mr-24 sm:mr-0 " >
-          <div className=" h-12 w-12 flex flex-row sm:hidden ">
+          <div className=" h-12 w-12 flex flex-row sm:hidden md:block ">
           <img src= {currentSong?.images?.coverart} alt='music art' className=" items-center mt-2 justify-center object-cover  rounded-full" />
           </div>
           <div>
@@ -100,14 +97,14 @@ console.log(currentSong)
         <div></div>
        )} 
 
-        
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <div className=" md:ml-24">
   
 
 
 
 
-<div className="  flex md:flex flex-row items-center justify-center gap-6 mt-0">
+<div className="  flex md:flex flex-row items-center justify-center gap-12 mt-0 ">
 <MdSkipPrevious 
            size={20}
            onClick={toPrevTrack}
@@ -151,12 +148,12 @@ console.log(currentSong)
         value={trackProgress}
         step="1" 
         min="0"
-        max={duration ? duration : `${duration}`}
+      
         className="progress "
         onChange={(e) => onScrub(e.target.value)}
         onMouseUp={onScrubEnd}
         onKeyUp={onScrubEnd}
-         style={{ background: trackStyling }}
+         
 	
       />
       
