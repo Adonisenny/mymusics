@@ -38,9 +38,7 @@ button {
 }
 .App{
   display: grid;
-  grid-template-columns:auto auto auto;
-  width: 100%;
-  
+  grid-template-columns:auto auto auto
 }
  .container{
  position: relative; 
@@ -129,14 +127,14 @@ button {
 }
 .btn2, .btn1{
   color: blue;
-} 
+} */
 input[type=range] {
-	height: 3px;
+	height: 5px;
 	-webkit-appearance: none;
-	width: 100%;
+	width: 60%;
 	margin-bottom: 10px;
 	border-radius: 8px;
-background: white;;
+	background: #3b7677;
 	transition: background 0.2s ease;
 	cursor: pointer;
 }
@@ -162,8 +160,10 @@ h3{
 .houseps{
  background: #191624;
   min-width: 0%;
+  
   color: #fff;
-  }
+  
+}
 .housediv3{
   display: flex;
  align-items: center; 
@@ -172,22 +172,25 @@ h3{
 }
   
 .div3{
-background-color: #050c24;
-  }
+  
+  
+  
+  background-color: #050c24;
+  
+   
+}
 .divps{
+
+
 color:white
 }
 .imgdiv3{
   padding: 12px;
   max-width: 15%;
   
+  
 
-}
-.firstSideBar{
-  min-width: 10%;
-}
-.div3 {
-  min-width: 10%;
+
 } 
 .music-container{
   
@@ -199,38 +202,3 @@ color:white
   width: 90px;
   
  }
- .box{
-              position: absolute;
-    opacity: 0.8;  /* for demo purpose  */
-}
-.stack-top{
-  z-index: 9;
-  
-  opacity: 0.6;
-  width: 100%;
-  top:88%;
-  height: 80px;
-  
-  border-radius: 12px;
-  align-items: center;
-  justify-content: center;
-
-  
-  
-  position: fixed;
-}
-.control{
-  color: brown;
-}
- /* .btn1,.btn2,.btn{
-  display: none;
-} */
-/* .btn:hover{
-  display: block;
-}
-.btn1:hover{
-  display: block;
-}
-.btn2:hover{
-  display: block;
-}  */

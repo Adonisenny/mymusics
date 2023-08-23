@@ -3,123 +3,49 @@ import {FaPauseCircle,FaPlayCircle} from 'react-icons/fa'
 import { MdSkipNext, MdSkipPrevious } from 'react-icons/md';
 
 
-const Images = ({muse,music}) => {
+const Images = ({muse,music,toPrevTrack,toNextTrack,getSongData,index,currentIndex}) => {
   
   const [isPlaying,setIsplaying] = useState(false)
-  const [musics,setMusics] = useState(music)
+  
+  const [shown,setIsShown] = useState(false)
   
   const [currentSong,setCurrentSong] = useState(muse)
-  const [trackProgress,setTrackProgress] =useState(0)
-
-
-
-
-      const uri = currentSong?.hub?.actions?.[1]?.uri
-      // console.log(muse?.hub?.actions?.[1]?.uri)
+  
+  const uri = currentSong?.hub?.actions?.[1]?.uri
+      
       const audioRef = useRef(new Audio(uri))
 
-       //  console.log(audioRef)
-    // let empty = []
-    // const filled = empty.push(got)
-    //  console.log(filled)
-    // console.log(got[1])oh
-    // console.log(got[0])
-    // const [trackIndex,setTrackIndex] = useState(muse[index])
-    // console.log(music?.hub?.actions?.[1]?.uri)
-    
-    
-    // console.log(muse.title)
-   
-    
-    
+
+      
     const handleClick = () => {   
         setIsplaying(prev => !prev)
     }
-    const onScrub = (value) => {
-      // Clear any timers already running
-      clearInterval(intervalRef.current);
-      audioRef.current.currentTime = value;
-      setTrackProgress(audioRef.current.currentTime);
-    }
-    
-    const onScrubEnd = () => {
-      // If not already playing, start
-      if (!isPlaying) {
-        setIsplaying(true);
-      }
-      startTimer();
-    }
-
-
-    const toPrevTrack = () => {
-      const index = musics.findIndex(Object => Object.title === currentSong.title)
-      console.log(index)
-       if (index -1 < 0) {
-        
-        setCurrentSong(muse[muse.length-1])
-        
-        }
-       
-       
-       else{
-        setCurrentSong(muse[index - 1])
-       }
-       audioRef.current.currentTime = 0;
-       
-      }
-      
-     
-      const toNextTrack = () => {
-        const index = music.findIndex(x => muse.title === currentSong?.title)
-        if (index ===music.length -1) {
-         setCurrentSong(music[0])
-         console.log(music[index+1])
-         
-        }
-        
-        else{
-         setCurrentSong(music[index + 1])
-         
-        }
-        intervalRef.current.currentTime= 0
-       }
-      
-         
-      
-      
-
-    const intervalRef =useRef()
-    const isReady =useRef(false)
-    const {duration} =audioRef.current
-    
-
-    const startTimer = () => {
-      // Clear any timers already running
-      clearInterval(intervalRef.current);
-  
-      intervalRef.current = setInterval(() => {
-        if (audioRef.current.ended) {
-          
-          setIsplaying(false);
-        } else {
-          setTrackProgress(audioRef.current.currentTime);
-        }
-      }, [2000]);
-    };
-    useEffect(() => {
-    if(isPlaying) {
-        audioRef.current.play()
-        startTimer()
-        
-    }else{
-        audioRef.current.pause()
-    }},[isPlaying])
-    
-     
-    
    
-          
-    //  useEffect(() => {
+    
+// if(isPlaying){
+//   audioRef.current.play()
+// }   
+// else{
+//   audioRef.current.pause()
+// }
+
+
+    
+       
+      
+      
+     
+      
+         
+      
+      
+
+    
+
+    
+    
+    
+     //  useEffect(() => {
     //       audioRef.current.pause()
     //       audioRef.current =new Audio(audioRef)
     //       setTrackProgress(audioRef.current.currentTime);
@@ -128,79 +54,49 @@ const Images = ({muse,music}) => {
     // useEffect(() => {
 
     // },[])
-    useEffect(() => {
-      audioRef.current.pause();
     
-      audioRef.current = new Audio(uri);
-      setTrackProgress(audioRef.current.currentTime);
-    
-      if (isReady.current) {
-        audioRef.current.play();
-        setIsplaying(true);
-        startTimer();
-      }
-    }, [currentSong]);
 
 
-    const currentPercentage = duration ? `${(trackProgress / duration) * 100}%` : '0%';
-const trackStyling = `
-  -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #fff), color-stop(${currentPercentage}, #777))
-`;
+    
+
 
 
     
      return ( 
-        <div className="container w-56 h-auto " >
-            
+        <div className="container w-56 h-auto " onMouseEnter={() => setIsShown(true)}
+        onMouseLeave ={() => setIsShown(false)} onClick = {() => getSongData(muse,index)}
+        >
+
+
+<div className="houseinput">
+  
+        </div>
                      
-           <img src= {muse?.images?.coverart} alt='music art' className="imagess" /> 
-           <p className='text-white'>{muse?.title}</p>
+           <img src= {muse?.images?.coverart} alt='music art' className="imagess " /> 
+           <p className='text-white'>{muse?.title.slice(0,20)}</p>
            
-            
-           <MdSkipPrevious 
-           size={30}
-           onClick={toPrevTrack}
-           className='btn1'
-           color="white"
-           />  
+            {shown && (
+            <div>
+           
            { !isPlaying ?  (
            
             <FaPlayCircle 
-            size={35}
+            size={25}
             className='btn'
             onClick={handleClick}
             />):(
             <FaPauseCircle 
-            size={35}
+            size={5}
             className='btn'
             onClick={handleClick}
             
             />)}
           
-          <MdSkipNext
-          size={30}
-          onClick={toNextTrack}
-          className='btn2'
-          color="white"
-          />
+          
+ 
+</div>)}
+</div>
 
-
-{isPlaying &&<input
-        type="range"
-        value={trackProgress}
-        step="1"
-        min="0"
-        max={duration ? duration : `${duration}`}
-        className="progress"
-        onChange={(e) => onScrub(e.target.value)}
-        onMouseUp={onScrubEnd}
-        onKeyUp={onScrubEnd}
-        style={{ background: trackStyling }}
-	
-      />}
-
-        
-        </div>
      );
 }
  
